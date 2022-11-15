@@ -61,9 +61,9 @@ class Plot:
         fig['layout']['yaxis']['title'] = 'Time Consumed (in ms)'
         fig['layout']['yaxis2']['title'] = 'Memory Consumed (in KB)'
 
-        fig.update_layout(height=1080, width=1920,
-                          title_text='Basic Implementation of Similarity Finding Algorithm',
-                          title_font_size=28,
+        fig.update_layout(height=1080 / 1.5, width=1920 / 1.2,
+                          title_text='Basic vs Efficient Sequence Alignment Algorithms',
+                          title_font_size=18,
                           font_family='Helvetica')
 
         fig.write_image(os.path.join(IMAGE_FOLDER, plot_name + '.png'))
