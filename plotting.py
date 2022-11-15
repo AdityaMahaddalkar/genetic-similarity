@@ -21,7 +21,7 @@ class Plot:
         self.efficient_time_consumed = PlottingData.get_all_time_values(efficient_plotting_data_list)
         self.efficient_memory_consumed = PlottingData.get_all_memory_consumed(efficient_plotting_data_list)
 
-    def plot(self, type_of_algorithm='basic'):
+    def plot(self, plot_name='plot'):
         fig = make_subplots(rows=1, cols=2,
                             x_title='Size of the Problem')
 
@@ -66,7 +66,7 @@ class Plot:
                           title_font_size=28,
                           font_family='Helvetica')
 
-        fig.write_image(os.path.join(IMAGE_FOLDER, type_of_algorithm + '.png'))
+        fig.write_image(os.path.join(IMAGE_FOLDER, plot_name + '.png'))
 
         fig.show()
 
