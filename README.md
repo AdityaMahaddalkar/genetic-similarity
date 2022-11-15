@@ -1,4 +1,4 @@
-# 🧬[Bio-Informatics] Genetic Sequence Alignment Algorithm
+# 🧬[Bio-Informatics] Genetic Sequence Alignment Problem
 
 *In bioinformatics, a sequence alignment is a way of arranging the sequences of DNA, RNA, or protein to identify regions
 of similarity that may be a consequence of functional, structural, or evolutionary relationships between the
