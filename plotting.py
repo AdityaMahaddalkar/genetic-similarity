@@ -67,6 +67,7 @@ class Plot:
                           font_family='Helvetica')
 
         fig.write_image(os.path.join(IMAGE_FOLDER, plot_name + '.png'))
+        fig.write_image(os.path.join(IMAGE_FOLDER, plot_name + '.svg'))
 
         fig.show()
 

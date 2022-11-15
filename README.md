@@ -51,7 +51,7 @@ keeping the time complexity in similar scalar range of O(mn).
 
 ## Visualizing Basic vs Efficient Algorithm
 
-![image Basic vs Efficient](images/plot.png)
+![image Basic vs Efficient](images/plot.svg)
 
 ## Input / Output Files
 
