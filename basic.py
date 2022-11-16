@@ -4,7 +4,7 @@ import time
 from ipop import IO
 from util import DELTA, ALPHA, process_memory, PlottingData
 
-LOGGING_LEVEL = logging.DEBUG
+LOGGING_LEVEL = logging.INFO
 
 logging.basicConfig(
     level=LOGGING_LEVEL
@@ -29,8 +29,11 @@ class Algorithm:
                           f'\tSimilarity={similarity}')
             logging.debug(plotting_data)
 
+            logging.info(f'm+n={len(first_gene_string) + len(second_gene_string)}')
+            logging.info(f'basic_time={plotting_data.time_required}\tmemory_consumed={plotting_data.memory_consumed}')
+
             self.io.write_to_output(name, similarity, new_string_1, new_string_2,
-                                    plotting_data.time_required, plotting_data.memory_consumed)
+                                    plotting_data.time_required, plotting_data.memory_consumed, algorithm_type='basic')
 
             if benchmark:
                 return
@@ -41,12 +44,7 @@ class Algorithm:
         i, j = len(string_1), len(string_2)
 
         while i > 0 and j > 0:
-            if string_1[i - 1] == string_2[j - 1]:
-                reverse_of_new_string_1 += string_1[i - 1]
-                reverse_of_new_string_2 += string_2[j - 1]
-                i -= 1
-                j -= 1
-            elif dp[i - 1][j - 1] + ALPHA[frozenset({string_1[i - 1], string_2[j - 1]})] == dp[i][j]:
+            if dp[i - 1][j - 1] + ALPHA[frozenset({string_1[i - 1], string_2[j - 1]})] == dp[i][j]:
                 reverse_of_new_string_1 += string_1[i - 1]
                 reverse_of_new_string_2 += string_2[j - 1]
                 i -= 1
@@ -64,9 +62,11 @@ class Algorithm:
 
         while i > 0:
             reverse_of_new_string_1 += string_1[i]
+            reverse_of_new_string_2 += '_'
             i -= 1
 
         while j > 0:
+            reverse_of_new_string_1 += '_'
             reverse_of_new_string_2 += string_2[j]
             j -= 1
 

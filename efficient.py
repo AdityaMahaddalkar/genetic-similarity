@@ -7,7 +7,7 @@ from util import DELTA, ALPHA, process_memory, PlottingData
 
 INFINITY = 10000000000
 
-LOG_LEVEL = logging.DEBUG
+LOG_LEVEL = logging.INFO
 
 logging.basicConfig(
     level=LOG_LEVEL
@@ -28,6 +28,16 @@ class Algorithm:
 
             logging.debug(f'Similarity={similarity}')
             logging.debug(f'Plotting data={plotting_data}')
+
+            logging.info(f'm+n={len(first_gene_string) + len(second_gene_string)}')
+            logging.info(
+                f'efficient_time={plotting_data.time_required}\tmemory_consumed={plotting_data.memory_consumed}')
+
+            self.io.write_to_output(
+                name, similarity, new_string_1, new_string_2,
+                plotting_data.time_required, plotting_data.memory_consumed,
+                algorithm_type='efficient'
+            )
 
             if benchmark:
                 break
@@ -128,7 +138,7 @@ class Algorithm:
                 reversed_second_alignment += '_'
                 i -= 1
             else:
-                raise Exception("Dp can't backtrace to the valid solution")
+                raise Exception("Invalid matching condition")
 
         while i > 0:
             reversed_first_alignment += first_gene_string[i - 1]

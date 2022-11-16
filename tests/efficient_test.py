@@ -17,9 +17,5 @@ def test_sample():
             lines = list(map(lambda x: x.strip(), lines))
 
             expected_similarity = int(lines[0])
-            expected_first_string = lines[1]
-            expected_second_string = lines[2]
 
             assert similarity == expected_similarity
-            # assert new_string_1 == expected_first_string
-            # assert new_string_2 == expected_second_string
