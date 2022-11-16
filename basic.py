@@ -2,10 +2,9 @@ import logging
 import time
 
 from ipop import IO
-from plotting import Plot
 from util import DELTA, ALPHA, process_memory, PlottingData
 
-LOGGING_LEVEL = logging.INFO
+LOGGING_LEVEL = logging.DEBUG
 
 logging.basicConfig(
     level=LOGGING_LEVEL
@@ -105,6 +104,3 @@ class Algorithm:
 if __name__ == '__main__':
     algorithm = Algorithm()
     algorithm.run()
-    algorithm.sort_plotting_data_with_problem_size()
-    plot = Plot(algorithm.plotting_data_list)
-    plot.plot()
