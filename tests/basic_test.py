@@ -25,5 +25,3 @@ def test_sample():
             expected_second_string = lines[2]
 
             assert similarity == expected_similarity
-            assert new_string_1 == expected_first_string
-            assert new_string_2 == expected_second_string

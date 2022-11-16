@@ -24,9 +24,14 @@ class IO:
         for name in file_names:
             yield name, os.path.join(self.input_path, name)
 
-    def write_to_output(self, infile_name: str, similarity, new_string_1, new_string_2, time_in_ms, size_in_kb):
+    def write_to_output(self, infile_name: str, similarity, new_string_1, new_string_2, time_in_ms, size_in_kb,
+                        algorithm_type='basic'):
         outfile_name = infile_name.replace("in", "out")
-        outfile_path = os.path.join(self.output_path, outfile_name)
+
+        if not os.path.isdir(os.path.join(self.output_path, algorithm_type)):
+            os.mkdir(os.path.join(self.output_path, algorithm_type))
+
+        outfile_path = os.path.join(self.output_path, algorithm_type, outfile_name)
         with open(outfile_path, 'w') as outfile:
             outfile.write(f'{similarity}\n')
             outfile.write(f'{new_string_1}\n')

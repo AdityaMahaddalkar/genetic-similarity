@@ -30,7 +30,14 @@ class Algorithm:
             logging.debug(f'Plotting data={plotting_data}')
 
             logging.info(f'm+n={len(first_gene_string) + len(second_gene_string)}')
-            logging.info(f'efficient_time={plotting_data.time_required}\tmemory_consumed={plotting_data.memory_consumed}')
+            logging.info(
+                f'efficient_time={plotting_data.time_required}\tmemory_consumed={plotting_data.memory_consumed}')
+
+            self.io.write_to_output(
+                name, similarity, new_string_1, new_string_2,
+                plotting_data.time_required, plotting_data.memory_consumed,
+                algorithm_type='efficient'
+            )
 
             if benchmark:
                 break
