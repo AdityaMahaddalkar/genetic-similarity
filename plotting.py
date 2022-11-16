@@ -71,6 +71,66 @@ class Plot:
 
         fig.show()
 
+    def plot_time_vs_problem_size(self):
+        fig = go.Figure()
+
+        line = {
+            'shape': 'spline',
+            'smoothing': 1.0,
+        }
+
+        fig.add_trace(
+            go.Scatter(x=self.problem_sizes, y=self.basic_time_consumed,
+                       name='Time Consumed for Basic Algorithm',
+                       line=line),
+        )
+
+        fig.add_trace(
+            go.Scatter(x=self.problem_sizes, y=self.efficient_time_consumed,
+                       name='Time Consumed for Efficient Algorithm',
+                       line=line),
+        )
+
+        fig.update_layout(height=1080 / 1.5, width=1920 / 1.5,
+                          title_text='Basic vs Efficient Time Consumed',
+                          title_font_size=18,
+                          font_family='Helvetica',
+                          yaxis_title='Time Consumed (in milliseconds)',
+                          xaxis_title='Problem Size')
+
+        fig.write_image(os.path.join(IMAGE_FOLDER, 'time_vs_problem_size.png'))
+
+    def plot_memory_vs_problem_size(self):
+        fig = go.Figure()
+
+        line = {
+            'shape': 'spline',
+            'smoothing': 1.0,
+        }
+
+        fig.add_trace(
+            go.Scatter(x=self.problem_sizes, y=self.basic_memory_consumed,
+                       name='Memory Consumed for Basic Algorithm',
+                       line=line),
+
+        )
+
+        fig.add_trace(
+            go.Scatter(x=self.problem_sizes, y=self.efficient_memory_consumed,
+                       name='Memory Consumed for Efficient Algorithm',
+                       line=line),
+
+        )
+
+        fig.update_layout(height=1080 / 1.5, width=1920 / 1.5,
+                          title_text='Basic vs Efficient Memory Consumed',
+                          title_font_size=18,
+                          font_family='Helvetica',
+                          yaxis_title='Memory Consumed (in bytes)',
+                          xaxis_title='Problem Size')
+
+        fig.write_image(os.path.join(IMAGE_FOLDER, 'memory_vs_problem_size.png'))
+
 
 if __name__ == '__main__':
     basic_algorithm = basic.Algorithm()
@@ -84,3 +144,6 @@ if __name__ == '__main__':
 
     plot = Plot(basic_algorithm.plotting_data_list, efficient_algorithm.plotting_data_list)
     plot.plot()
+
+    plot.plot_time_vs_problem_size()
+    plot.plot_memory_vs_problem_size()
