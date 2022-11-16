@@ -14,6 +14,7 @@ class IO:
 
         self.input_path = os.path.join(RESOURCES, INPUT_FOLDER)
         self.output_path = os.path.join(RESOURCES, OUTPUT_FOLDER)
+        self.sample_path = os.path.join(RESOURCES, SAMPLE)
 
         if not os.path.isdir(self.output_path):
             os.mkdir(self.output_path)
@@ -59,3 +60,11 @@ class IO:
                                                                                            index + 1:]
 
             return first_gene_string, second_gene_string
+
+    def generate_sample(self, file_type='input'):
+        file_names = next(os.walk(self.sample_path))[-1]
+
+        file_names = filter(lambda x: file_type in x, file_names)
+
+        for name in file_names:
+            yield name, os.path.join(self.sample_path, name)
