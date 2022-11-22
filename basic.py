@@ -95,7 +95,8 @@ class Algorithm:
         memory_consumed = process_memory()
         similarity = dp[len(string_1)][len(string_2)]
 
-        return similarity, new_string_1, new_string_2, PlottingData(len(new_string_1), time_in_ms, memory_consumed)
+        return similarity, new_string_1, new_string_2, PlottingData(len(string_1) + len(string_2), time_in_ms,
+                                                                    memory_consumed)
 
     def sort_plotting_data_with_problem_size(self):
         self.plotting_data_list.sort(key=lambda x: x.problem_size)

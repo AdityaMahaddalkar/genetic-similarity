@@ -3,7 +3,7 @@ import logging
 import time
 
 from ipop import IO
-from util import DELTA, ALPHA, process_memory, PlottingData
+from util import DELTA, ALPHA, PlottingData, process_memory
 
 INFINITY = 10000000000
 
@@ -12,6 +12,8 @@ LOG_LEVEL = logging.INFO
 logging.basicConfig(
     level=LOG_LEVEL
 )
+
+GLOBAL_MEMORY_ARRAY = []
 
 
 class Algorithm:
@@ -43,6 +45,9 @@ class Algorithm:
                 break
 
     def get_similarity(self, first_gene_string, second_gene_string):
+
+        global GLOBAL_MEMORY_ARRAY
+
         start_time = time.perf_counter_ns()
 
         first_alignment, second_alignment = Algorithm.dnc(first_gene_string, second_gene_string)
@@ -51,15 +56,15 @@ class Algorithm:
         logging.debug(f'{first_alignment}\t{second_alignment}')
 
         end_time = time.perf_counter_ns()
-        memory_consumed = process_memory()
+        memory_consumed = max(GLOBAL_MEMORY_ARRAY)
         time_in_ms = (end_time - start_time) / 10 ** 6
 
-        return similarity, first_alignment, second_alignment, PlottingData(len(first_gene_string), time_in_ms,
-                                                                           memory_consumed)
+        return similarity, first_alignment, second_alignment, PlottingData(
+            len(first_gene_string) + len(second_gene_string), time_in_ms,
+            memory_consumed)
 
     @staticmethod
     def dnc(first_gene_string: str, second_gene_string: str):
-
         first_alignment, second_alignment = '', ''
 
         if len(first_gene_string) == 0:
@@ -94,6 +99,10 @@ class Algorithm:
 
     @staticmethod
     def nw(first_gene_string, second_gene_string):
+        global GLOBAL_MEMORY_ARRAY
+
+        GLOBAL_MEMORY_ARRAY.append(process_memory())
+
         dp = [[0 for _ in range(len(second_gene_string) + 1)] for _ in range(len(first_gene_string) + 1)]
 
         for i in range(len(first_gene_string) + 1):
