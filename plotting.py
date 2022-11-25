@@ -128,7 +128,7 @@ class Plot:
                           title_text='Basic vs Efficient Memory Consumed',
                           title_font_size=18,
                           font_family='Helvetica',
-                          yaxis_title='Memory Consumed (in bytes)',
+                          yaxis_title='Memory Consumed (in KB)',
                           xaxis_title='Problem Size')
 
         fig.write_image(os.path.join(IMAGE_FOLDER, 'memory_vs_problem_size.png'))
